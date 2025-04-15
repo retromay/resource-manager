@@ -7,8 +7,6 @@ const Create = () => {
   const [description, setDescription] = useState("");
   const [type, setType] = useState("Pick a type");
 
-  const header = { "Access-Control-Allow-Origin": "*" };
-
   const handleSubmit = (e) => {
     e.preventDefault();
     axios({
@@ -18,7 +16,6 @@ const Create = () => {
         title: title,
         description: description,
         type: type,
-        header,
       },
     });
   };
@@ -48,7 +45,7 @@ const Create = () => {
         <fieldset className="fieldset">
           <legend className="fieldset-legend">Type</legend>
           <select
-            defaultValue="None"
+            defaultValue="Pick a type"
             className="select"
             onChange={(e) => setType(e.target.value)}
           >
