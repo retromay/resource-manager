@@ -25,6 +25,15 @@ const Read = () => {
     navigate("/create");
   };
 
+  const handleDelete = (id) => {
+    axios({
+      method: "delete",
+      url: `https://67fe40f53da09811b17845a0.mockapi.io/api/test/crud/${id}`,
+    }).then(function (response) {
+      getData();
+    });
+  };
+
   return (
     <>
       <button className="btn btn-primary" onClick={handleClick}>
@@ -55,7 +64,12 @@ const Read = () => {
                     </button>
                   </td>
                   <td>
-                    <button className="btn btn-soft btn-error btn-xs sm:btn-sm md:btn-md  ">
+                    <button
+                      className="btn btn-soft btn-error btn-xs sm:btn-sm md:btn-md  "
+                      onClick={() => {
+                        handleDelete(item.id);
+                      }}
+                    >
                       Delete
                     </button>
                   </td>
