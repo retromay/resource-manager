@@ -21,8 +21,15 @@ const Read = () => {
     getData();
   }, []);
 
-  const handleClick = () => {
+  const handleCreate = () => {
     navigate("/create");
+  };
+  const handleUpdate = (id, title, description, type) => {
+    navigate("/update");
+    localStorage.setItem("id", id);
+    localStorage.setItem("title", title);
+    localStorage.setItem("description", description);
+    localStorage.setItem("type", type);
   };
 
   const handleDelete = (id) => {
@@ -36,8 +43,8 @@ const Read = () => {
 
   return (
     <>
-      <button className="btn btn-primary" onClick={handleClick}>
-        Primary
+      <button className="btn btn-primary" onClick={handleCreate}>
+        Create
       </button>
       <div className="overflow-x-auto rounded-box border border-base-content/5 bg-base-100">
         <table className="table">
@@ -59,7 +66,17 @@ const Read = () => {
                   <td>{item.description}</td>
                   <td>{item.type}</td>
                   <td>
-                    <button className="btn btn-soft btn-info btn-xs sm:btn-sm md:btn-md  ">
+                    <button
+                      className="btn btn-soft btn-info btn-xs sm:btn-sm md:btn-md"
+                      onClick={() =>
+                        handleUpdate(
+                          item.id,
+                          item.title,
+                          item.description,
+                          item.type
+                        )
+                      }
+                    >
                       Edit
                     </button>
                   </td>
