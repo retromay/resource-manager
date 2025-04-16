@@ -1,7 +1,7 @@
-import axios from "axios"; // Import axios library for making HTTP requests
-import React from "react"; // Import React library
-import { useState } from "react"; // Import useState hook for state management
-import { useNavigate } from "react-router-dom"; // Import useNavigate hook for navigation
+import axios from "axios";
+import React from "react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 /**
  Create Component
