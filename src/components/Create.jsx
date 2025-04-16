@@ -1,19 +1,36 @@
-import axios from "axios";
-import React from "react";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import axios from "axios"; // Import axios library for making HTTP requests
+import React from "react"; // Import React library
+import { useState } from "react"; // Import useState hook for state management
+import { useNavigate } from "react-router-dom"; // Import useNavigate hook for navigation
+
+/**
+ Create Component
+ * This component renders a form that allows users to create new entries
+ * for the CRUD application. *
+ */
 
 const Create = () => {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [type, setType] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
+  // State variables for form fields and loading state
+  const [title, setTitle] = useState(""); // State for title input
+  const [description, setDescription] = useState(""); // State for description textarea
+  const [type, setType] = useState(""); // State for type dropdown (empty initial value)
+  const [isLoading, setIsLoading] = useState(false); // State to track loading/submission status
 
+  // Initialize navigation function from react-router
   const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  /**
+   * Handle form submission
+   * This function handles the form submission, sends the data to the API,
+   * and redirects to the home page on success.
+   *
+   * @param {Event} e - The form submission event
+   */
 
+  const handleSubmit = async (e) => {
+    e.preventDefault(); // Prevent default form submission behavior
+
+    // Send POST request to the API with form data
     try {
       setIsLoading(true);
       await axios.post(
@@ -24,24 +41,32 @@ const Create = () => {
           type,
         }
       );
-      navigate("/");
+      navigate("/"); // Navigate back to home page after successful submission
     } catch (error) {
       console.error("Error creating record:", error);
+      // Handle error (e.g., show error message to user)
+      // You can use a toast notification or alert to inform the user about the error
       // Show error to user
     } finally {
-      setIsLoading(false);
+      setIsLoading(false); // Reset loading state
     }
   };
 
   return (
     <>
+      {/* Main container with flex for centering */}
       <div className="flex justify-center items-center min-h-screen">
+        {/* Card container with fixed width and styling */}
         <div className="w-full max-w-md p-6 bg-white rounded-lg shadow-md">
+          {/* Form title */}
           <h2 className="text-2xl font-bold mb-6 text-center">
             Create New Item
           </h2>
+
+          {/* Form with onSubmit handler */}
           <form className="form" onSubmit={handleSubmit}>
             <fieldset className="fieldset">
+              {/* Title field */}
               <legend className="fieldset-legend">Title</legend>
               <input
                 type="text"
@@ -52,6 +77,8 @@ const Create = () => {
               />
               <p className="fieldset-label">Required</p>
             </fieldset>
+
+            {/* Description field */}
             <fieldset className="fieldset">
               <legend className="fieldset-legend">Description</legend>
               <textarea
@@ -62,6 +89,8 @@ const Create = () => {
               ></textarea>
               <p className="fieldset-label">Required</p>
             </fieldset>
+
+            {/* Type dropdown field */}
             <fieldset className="fieldset">
               <legend className="fieldset-legend">Type</legend>
               <select
@@ -70,6 +99,7 @@ const Create = () => {
                 required={true}
                 onChange={(e) => setType(e.target.value)}
               >
+                {/* Placeholder option - disabled and can't be selected */}
                 <option value="" disabled>
                   Pick a type
                 </option>
@@ -79,7 +109,10 @@ const Create = () => {
               </select>
               <p className="fieldset-label">Required</p>
             </fieldset>
+
+            {/* Submit button container - centered */}
             <div className="flex justify-center mt-6">
+              {/* Submit button with dynamic text based on loading state */}
               <button className="btn" type="submit" disabled={isLoading}>
                 {isLoading ? "Submitting..." : "Submit"}
               </button>
