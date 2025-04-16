@@ -1,3 +1,6 @@
+//This component handles the update form submission and updates the record in the API
+// This will normally be a separate file, but for the sake of this example, it's included here
+
 import axios from "axios";
 
 const BASE_URL = "https://67fe40f53da09811b17845a0.mockapi.io/api/test";
