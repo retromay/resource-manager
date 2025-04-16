@@ -182,9 +182,9 @@ const Read = () => {
           <tbody>
             {filteredData.length > 0 ? (
               // Map through filtered data if records exist
-              filteredData.map((item) => (
+              filteredData.map((item, index) => (
                 <tr key={item.id}>
-                  <th>{item.id}</th>
+                  <th>{index + 1}</th>
                   <td>{item.title}</td>
 
                   {/* Truncated description with full text in title attribute (tooltip on hover) */}
