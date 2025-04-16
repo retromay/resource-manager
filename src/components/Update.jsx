@@ -2,6 +2,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { api } from "../Services/api";
 
 /**
  * Update Component
@@ -54,14 +55,10 @@ const Update = () => {
       setIsLoading(true); // Set loading state to disable button
 
       // Send PUT request to update the record
-      await axios({
-        method: "put",
-        url: `https://67fe40f53da09811b17845a0.mockapi.io/api/test/crud/${id}`,
-        data: {
-          title,
-          description,
-          type,
-        },
+      await api.updateItem(id, {
+        title: title, // Updated title
+        description: description, // Updated description
+        type: type, // Updated type
       });
 
       // Clear localStorage items as they're no longer needed

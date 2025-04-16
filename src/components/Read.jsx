@@ -9,6 +9,7 @@ import React from "react";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { api } from "../Services/api";
 
 const Read = () => {
   const [data, setData] = useState([]); // State to store fetched data
@@ -29,11 +30,9 @@ const Read = () => {
   // Fetch data from API
   const getData = async () => {
     try {
-      const response = await axios.get(
-        "https://67fe40f53da09811b17845a0.mockapi.io/api/test/crud"
-      );
-      setData(response.data); // Update main data state
-      setFilteredData(response.data); // Initialize filtered data with all records
+      const response = await api.getAllItems();
+      setData(response); // Update main data state
+      setFilteredData(response); // Initialize filtered data with all records
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -99,10 +98,8 @@ const Read = () => {
     if (window.confirm("Are you sure you want to delete this item?")) {
       try {
         // Send delete request to API
-        await axios({
-          method: "delete",
-          url: `https://67fe40f53da09811b17845a0.mockapi.io/api/test/crud/${id}`,
-        });
+        await api.deleteItem(id);
+
         getData(); // Refresh data after successful deletion
       } catch (error) {
         console.error("Error deleting item:", error);

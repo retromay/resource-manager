@@ -2,6 +2,7 @@ import axios from "axios";
 import React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { api } from "../Services/api";
 
 /**
  Create Component
@@ -33,14 +34,11 @@ const Create = () => {
     // Send POST request to the API with form data
     try {
       setIsLoading(true);
-      await axios.post(
-        "https://67fe40f53da09811b17845a0.mockapi.io/api/test/crud",
-        {
-          title,
-          description,
-          type,
-        }
-      );
+      await api.createItem({
+        title: title,
+        description: description,
+        type: type,
+      }); // Call the API to create a new item
       navigate("/"); // Navigate back to home page after successful submission
     } catch (error) {
       console.error("Error creating record:", error);
