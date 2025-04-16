@@ -111,10 +111,23 @@ const Create = () => {
             </fieldset>
 
             {/* Submit button container - centered */}
-            <div className="flex justify-center mt-6">
+            <div className="flex justify-center gap-4 mt-6">
               {/* Submit button with dynamic text based on loading state */}
-              <button className="btn" type="submit" disabled={isLoading}>
+              <button
+                className="btn btn-primary "
+                type="submit"
+                disabled={isLoading}
+              >
                 {isLoading ? "Submitting..." : "Submit"}
+              </button>
+
+              {/* Cancel button to return to main page */}
+              <button
+                className="btn"
+                type="button"
+                onClick={() => navigate("/")}
+              >
+                Cancel
               </button>
             </div>
           </form>
