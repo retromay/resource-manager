@@ -6,12 +6,16 @@ import { useNavigate } from "react-router-dom";
 const Create = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [type, setType] = useState("Pick a type");
+  const [type, setType] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    setIsLoading(true);
+
     axios({
       method: "post",
       url: "https://67fe40f53da09811b17845a0.mockapi.io/api/test/crud",
@@ -28,42 +32,49 @@ const Create = () => {
   return (
     <>
       <div>
-        <fieldset className="fieldset">
-          <legend className="fieldset-legend">Title</legend>
-          <input
-            type="text"
-            className="input"
-            placeholder="Type here"
-            onChange={(e) => setTitle(e.target.value)}
-          />
-          <p className="fieldset-label">Required</p>
-        </fieldset>
-        <fieldset className="fieldset">
-          <legend className="fieldset-legend">Description</legend>
-          <textarea
-            className="textarea h-24"
-            placeholder="Bio"
-            onChange={(e) => setDescription(e.target.value)}
-          ></textarea>
-          <p className="fieldset-label">Required</p>
-        </fieldset>
-        <fieldset className="fieldset">
-          <legend className="fieldset-legend">Type</legend>
-          <select
-            defaultValue="Pick a type"
-            className="select"
-            onChange={(e) => setType(e.target.value)}
-          >
-            <option disabled={true}>Pick a type</option>
-            <option>Article</option>
-            <option>Video</option>
-            <option>Tutorial</option>
-          </select>
-          <p className="fieldset-label">Required</p>
-        </fieldset>
-        <button className="btn" onClick={handleSubmit}>
-          Submit
-        </button>
+        <form className="form" onSubmit={handleSubmit}>
+          <fieldset className="fieldset">
+            <legend className="fieldset-legend">Title</legend>
+            <input
+              type="text"
+              required={true}
+              className="input"
+              placeholder="Type here"
+              onChange={(e) => setTitle(e.target.value)}
+            />
+            <p className="fieldset-label">Required</p>
+          </fieldset>
+          <fieldset className="fieldset">
+            <legend className="fieldset-legend">Description</legend>
+            <textarea
+              className="textarea h-24"
+              placeholder="Bio"
+              required={true}
+              onChange={(e) => setDescription(e.target.value)}
+            ></textarea>
+            <p className="fieldset-label">Required</p>
+          </fieldset>
+          <fieldset className="fieldset">
+            <legend className="fieldset-legend">Type</legend>
+            <select
+              value={type}
+              className="select"
+              required={true}
+              onChange={(e) => setType(e.target.value)}
+            >
+              <option value="" disabled>
+                Pick a type
+              </option>
+              <option value="Article">Article</option>
+              <option value="Video">Video</option>
+              <option value="Tutorial">Tutorial</option>
+            </select>
+            <p className="fieldset-label">Required</p>
+          </fieldset>
+          <button className="btn" type="submit" disabled={isLoading}>
+            {isLoading ? "Submitting..." : "Submit"}
+          </button>
+        </form>
       </div>
     </>
   );
