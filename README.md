@@ -79,3 +79,28 @@ The project uses the following dependencies:
 - **Prettier**: A code formatter to ensure consistent style.
 - **DaisyUI**: A Tailwind CSS component library for building modern UI designs.
 - **Tailwind CSS**: A utility-first CSS framework for rapid UI development.
+
+## Tech Stack
+
+The project is built using the following technologies:
+
+- **React**: Frontend library for building user interfaces.
+- **Tailwind CSS**: Utility-first CSS framework for styling.
+- **JavaScript**: Programming language for building dynamic web applications.
+- **DaisyUI**: Tailwind CSS component library for modern UI design.
+
+## Assumptions and Limitations
+
+### Assumptions
+
+- The application assumes that the user has Node.js and npm installed on their system.
+- Users have a basic understanding of CRUD operations and RESTful APIs.
+
+### Limitations
+
+- The application does not support real-time collaboration or multi-user editing.
+- Limited to managing resources within a single project scope.
+- Assumes a stable internet connection for API communication.
+- Error handling is basic and may not cover all edge cases.
+- Limited testing coverage for edge cases and scalability.
+- Doesnt have pagination so with large amount of data use have to scroll to the end.
